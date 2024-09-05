@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.black_eyes.simpleJavaPlugin</groupId>
-  <artifactId>${project.name}</artifactId>
+  <artifactId>simplejavaplugin</artifactId>
   <version>0.1</version>
   <name>SimpleJavaPlugin</name>
   <description>Basic plugin library, to create and load config files and make an updater without effort</description>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-
+    <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.release>8</maven.compiler.release>
   </properties>
   <build>

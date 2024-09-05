@@ -45,8 +45,7 @@ public abstract class SimpleJavaPlugin extends JavaPlugin {
         super.onEnable();
         configFiles.saveConfig();
         configFiles.saveLang();
-		//load config
-		//setConfigs(Config.getInstance(configFiles.getConfig()));
+
         new Updater(this);
 	}
 	

@@ -8,15 +8,13 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import fr.black_eyes.simpleJavaPlugin.colors.Ansi;
 import fr.black_eyes.simpleJavaPlugin.colors.Ansi.Attribute;
 import lombok.Setter;
 
 public class Utils  {
 
-	@Setter private static JavaPlugin plugin;
+	@Setter private static SimpleJavaPlugin plugin;
 	static Map<String, String> replace = new HashMap<String, String>(){{
 		put("&0",Ansi.ansi().a(Attribute.RESET).fg(Ansi.Color.BLACK).boldOff().toString());
 		put("&1",Ansi.ansi().a(Attribute.RESET).fg(Ansi.Color.BLUE).boldOff().toString());
@@ -49,7 +47,7 @@ public class Utils  {
 	//message functions that automatically get a message from config lang file
 	public static void msg(CommandSender p, String path, String replacer, String replacement) {
 		String message = path;
-		if(Files.getInstance().getLang().isSet(path)) {
+		if(plugin.getConfigFiles().getLang().isSet(path)) {
 			message = getMsg(path, replacer, replacement);
 		}
 		sendMultilineMessage(message, p);
@@ -57,7 +55,7 @@ public class Utils  {
 	
 	//message functions that automatically get a message from config lang file
 	public static void msg(CommandSender p, String path, String replacer, String replacement, String replacer2, String replacement2) {
-		String message = Files.getInstance().getLang().getString(path).replace(replacer, replacement).replace(replacer2, replacement2);
+		String message = plugin.getConfigFiles().getLang().getString(path).replace(replacer, replacement).replace(replacer2, replacement2);
 		sendMultilineMessage(message, p);
 	}
 	
@@ -67,8 +65,8 @@ public class Utils  {
 	 */
 	public static void msg(CommandSender p, String path,  String r1, String r1b, String r2, String r2b, String r3, String r3b, String r4, String r4b,  String r5, String r5b) {
 		String message = path;
-		if(Files.getInstance().getLang().isSet(path)) {
-			message = Files.getInstance().getLang().getString(path);
+		if(plugin.getConfigFiles().getLang().isSet(path)) {
+			message = plugin.getConfigFiles().getLang().getString(path);
 		}
 		message = message.replace(r1, r1b).replace(r2, r2b).replace(r3, r3b).replace(r4, r4b).replace(r5, r5b);
 		sendMultilineMessage(message, p);
@@ -86,7 +84,7 @@ public class Utils  {
 		return color(getMsg(path).replace(replacer, replacement));
 	}
 	public static String getMsg(String path) {
-		return color(Files.getInstance().getLang().getString(path));
+		return color(plugin.getConfigFiles().getLang().getString(path));
 	}
 
 	/**
@@ -94,7 +92,7 @@ public class Utils  {
 	 * @param msg the message to send
 	 */
 	public static void logInfo(String msg) {
-		Files configFiles = Files.getInstance();
+		Files configFiles = plugin.getConfigFiles();
     	if(configFiles.getConfig() ==null || !configFiles.getConfig().isSet("ConsoleMessages") || configFiles.getConfig().getBoolean("ConsoleMessages")) {
 			// use replace to replace all the keys from the map with their values
 			for (Map.Entry<String, String> entry : replace.entrySet()) {

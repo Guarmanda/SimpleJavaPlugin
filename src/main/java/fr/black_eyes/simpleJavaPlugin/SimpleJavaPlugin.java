@@ -17,7 +17,6 @@ public abstract class SimpleJavaPlugin extends JavaPlugin {
 	@Getter protected Files configFiles;
 	protected PluginCommand command;
 
-	@SuppressWarnings("deprecation")
 	public void setCommandExecutor(CommandExecutor commandExecutor) {
 		// get the first command from plugin.yml
 		command = getDescription().getCommands().keySet().stream().map(this::getCommand).findFirst().orElse(null);
@@ -35,7 +34,7 @@ public abstract class SimpleJavaPlugin extends JavaPlugin {
 	public void onEnable() {
 		
 		configFiles = Files.getInstance();
-
+		configFiles.setPlugin(this);
 		Utils.setPlugin(this);
 		Utils.logInfo("Loading config files...");
 		if(!configFiles.initFiles()) {

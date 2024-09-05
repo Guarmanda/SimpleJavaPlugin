@@ -23,7 +23,6 @@ public class Updater {
     //example value
     @Setter private String spigot_complete_id /* = "lootchest.61564"*/;
 
-    @SuppressWarnings("deprecation")
     public Updater(JavaPlugin plugin) {
         if(spigot_complete_id == null) {
         	Utils.logInfo("&cUpdater not initialized, please set the spigot_complete_id value.");

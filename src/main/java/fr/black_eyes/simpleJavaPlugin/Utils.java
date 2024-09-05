@@ -14,7 +14,6 @@ import fr.black_eyes.simpleJavaPlugin.colors.Ansi;
 import fr.black_eyes.simpleJavaPlugin.colors.Ansi.Attribute;
 import lombok.Setter;
 
-@SuppressWarnings("deprecation")
 public class Utils  {
 
 	@Setter private static JavaPlugin plugin;

@@ -21,7 +21,7 @@ public class Updater {
     private JavaPlugin plugin;
     
     //example value
-    @Setter private String spigot_complete_id /* = "lootchest.61564"*/;
+    @Setter private static String spigot_complete_id /* = "lootchest.61564"*/;
 
     public Updater(JavaPlugin plugin) {
         if(spigot_complete_id == null) {

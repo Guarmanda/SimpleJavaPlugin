@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.black_eyes.simpleJavaPlugin</groupId>
   <artifactId>simplejavaplugin</artifactId>
-  <version>0.6</version>
+  <version>0.7</version>
   <name>SimpleJavaPlugin</name>
   <description>Basic plugin library, to create and load config files and make an updater without effort</description>
   <packaging>jar</packaging>

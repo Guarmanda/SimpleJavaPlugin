@@ -10,8 +10,6 @@ import java.util.function.Consumer;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import lombok.Setter;
-
 
 
 
@@ -20,14 +18,14 @@ public class Updater {
 
     private JavaPlugin plugin;
     
-    //example value
-    @Setter private static String spigot_complete_id /* = "lootchest.61564"*/;
+    private String spigot_complete_id /* = "lootchest.61564"*/;
 
-    public Updater(JavaPlugin plugin) {
+    public Updater(JavaPlugin plugin, String spigot_complete_id) {
         if(spigot_complete_id == null) {
         	Utils.logInfo("&cUpdater not initialized, please set the spigot_complete_id value.");
         	return;
         }
+        this.spigot_complete_id = spigot_complete_id;
         this.plugin = plugin;
         String installedVersion = plugin.getDescription().getVersion();
         this.getVersion(version -> {

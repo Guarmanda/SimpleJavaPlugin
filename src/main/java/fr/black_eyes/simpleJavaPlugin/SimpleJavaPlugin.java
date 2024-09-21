@@ -6,9 +6,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import lombok.Getter;
 
 
@@ -45,8 +47,6 @@ public abstract class SimpleJavaPlugin extends JavaPlugin {
         super.onEnable();
         configFiles.saveConfig();
         configFiles.saveLang();
-
-        new Updater(this);
 	}
 	
 

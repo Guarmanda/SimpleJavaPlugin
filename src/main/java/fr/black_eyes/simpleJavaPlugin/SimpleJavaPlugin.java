@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -22,7 +23,8 @@ public abstract class SimpleJavaPlugin extends JavaPlugin {
 	public void setCommandExecutor(CommandExecutor commandExecutor) {
 		// get the first command from plugin.yml
 		command = getDescription().getCommands().keySet().stream().map(this::getCommand).findFirst().orElse(null);
-		command.setExecutor(commandExecutor);
+        assert command != null;
+        command.setExecutor(commandExecutor);
 	}
 	
 
@@ -58,7 +60,7 @@ public abstract class SimpleJavaPlugin extends JavaPlugin {
 		if(!directoryPath.exists()) {
 			directoryPath.mkdir();
 		}
-		List<String> contents = Arrays.asList(directoryPath.list());
+		List<String> contents = Arrays.asList(Objects.requireNonNull(directoryPath.list()));
 		int i=0;
 		//finding valid backup name
 		if(!contents.isEmpty()) {

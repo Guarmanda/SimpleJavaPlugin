@@ -43,40 +43,34 @@ public class Utils  {
 	public static String color(String s){
 		return ChatColor.translateAlternateColorCodes('&', s);
 	}
-	
+
 	//message functions that automatically get a message from config lang file
 	public static void msg(CommandSender p, String path, String replacer, String replacement) {
-		String message = path;
-		if(plugin.getConfigFiles().getLang().isSet(path)) {
-			message = getMsg(path, replacer, replacement);
-		}
+		String message = getMsg(path, replacer, replacement);
 		sendMultilineMessage(message, p);
 	}
-	
+
 	//message functions that automatically get a message from config lang file
 	public static void msg(CommandSender p, String path, String replacer, String replacement, String replacer2, String replacement2) {
-		String message = plugin.getConfigFiles().getLang().getString(path).replace(replacer, replacement).replace(replacer2, replacement2);
+		String message = getMsg(path, replacer, replacement, replacer2, replacement2);
 		sendMultilineMessage(message, p);
 	}
-	
+
 	/*
 	 * This function is only for messages of chest spawning.
-	 * 
+	 *
 	 */
 	public static void msg(CommandSender p, String path,  String r1, String r1b, String r2, String r2b, String r3, String r3b, String r4, String r4b,  String r5, String r5b) {
-		String message = path;
-		if(plugin.getConfigFiles().getLang().isSet(path)) {
-			message = plugin.getConfigFiles().getLang().getString(path);
-		}
-		message = message.replace(r1, r1b).replace(r2, r2b).replace(r3, r3b).replace(r4, r4b).replace(r5, r5b);
+		String message = getMsg(path, r1, r1b, r2, r2b);
+		message = message.replace(r3, r3b).replace(r4, r4b).replace(r5, r5b);
 		sendMultilineMessage(message, p);
 	}
-	
+
 	public static void sendMultilineMessage(String message, CommandSender player) {
 		List<String> msgs = Arrays.asList(message.split("\\\\n"));
-		msgs.stream().forEach(msg -> player.sendMessage(color(msg)));
+		msgs.forEach(msg -> player.sendMessage(color(msg)));
 	}
-	
+
 	public static String getMsg(String path, String replacer, String replacement,  String replacer2, String replacement2) {
 		return color(getMsg(path, replacer, replacement).replace( replacer2, replacement2));
 	}
@@ -84,7 +78,10 @@ public class Utils  {
 		return color(getMsg(path).replace(replacer, replacement));
 	}
 	public static String getMsg(String path) {
-		return color(plugin.getConfigFiles().getLang().getString(path));
+		if(plugin.getConfigFiles().getLang().isSet(path)) {
+			return color(plugin.getConfigFiles().getLang().getString(path));
+		}
+		else return "";
 	}
 
 	/**
@@ -96,7 +93,7 @@ public class Utils  {
     	if(configFiles.getConfig() ==null || !configFiles.getConfig().isSet("ConsoleMessages") || configFiles.getConfig().getBoolean("ConsoleMessages")) {
 			// use replace to replace all the keys from the map with their values
 			for (Map.Entry<String, String> entry : replace.entrySet()) {
-				msg = msg.replace(entry.getKey(), entry.getValue().toString());
+				msg = msg.replace(entry.getKey(), entry.getValue());
 			}
 			//add reset to the end of the message
 			msg = msg + Ansi.ansi().a(Attribute.RESET).toString();

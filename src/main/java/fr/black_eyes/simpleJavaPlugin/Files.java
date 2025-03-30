@@ -7,7 +7,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
+import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -17,11 +19,14 @@ import lombok.Setter;
 
 public class Files {
 	private File dataFile;
-	private FileConfiguration data;
+	@Getter
+    private FileConfiguration data;
 	private File configFile;
-	private FileConfiguration config;
+	@Getter
+    private FileConfiguration config;
 	private File langFile;
-	private FileConfiguration lang;
+	@Getter
+    private FileConfiguration lang;
 	public Boolean PER_WORLD_MESSAGE;
 	private @Setter JavaPlugin plugin;
 	private static Files instance;
@@ -119,20 +124,9 @@ public class Files {
 	public File getLangF() {
 		return langFile;
 	}
-	public FileConfiguration getData() {
-		return data;
-	}
-	public FileConfiguration getConfig() {
-		return config;
-	}
-	public FileConfiguration getLang() {
-		return lang;
-	}
-	
-	
 
-	
-	public boolean initFiles() {
+
+    public boolean initFiles() {
 		//config
 	    configFile = new File(plugin.getDataFolder(), "config.yml");
 	    langFile = new File(plugin.getDataFolder(), "lang.yml");
@@ -168,7 +162,7 @@ public class Files {
 	    if(dataFile.length() <10) {
 	    	Utils.logInfo("&cInvalid data file detected! Finding backup right now...");
 			File directoryPath = new File(plugin.getDataFolder() + "/backups/");
-			List<String> contents = Arrays.asList(directoryPath.list());
+			List<String> contents = Arrays.asList(Objects.requireNonNull(directoryPath.list()));
 			int i;
 			//finding valid backup name
 			for(i=0; contents.contains(i+"data.yml");i++);
